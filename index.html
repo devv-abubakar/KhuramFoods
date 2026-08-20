@@ -392,6 +392,31 @@
   .reveal-fallback{ opacity:0; transform:translateY(40px); transition: all .8s cubic-bezier(.23,1,.32,1); }
   .reveal-fallback.active{ opacity:1; transform:translateY(0); }
 
+  /* ============ IMAGE LIGHTBOX ============ */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    display:flex; align-items:center; justify-content:center;
+    z-index:10001; opacity:0; visibility:hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+    padding:30px 20px;
+  }
+  .lightbox.active{ opacity:1; visibility:visible; }
+  .lightbox-box{
+    position:relative; background:#fff; border-radius:20px; padding:34px;
+    max-width:90vw; max-height:85vh; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+    transform:scale(.9); transition:transform .3s ease;
+  }
+  .lightbox.active .lightbox-box{ transform:scale(1); }
+  .lightbox-box img{ max-width:100%; max-height:75vh; width:auto; object-fit:contain; }
+  .lightbox-close{
+    position:absolute; top:-16px; right:-16px; width:40px; height:40px; border-radius:50%;
+    background:var(--red); color:#fff; border:none; font-size:1.5rem; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    transition: transform .3s ease, background .3s ease;
+  }
+  .lightbox-close:hover{ transform: scale(1.1) rotate(90deg); background: var(--orange); }
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1024px){
     .hero h1{ font-size:3.1rem; }
@@ -422,6 +447,7 @@
     .footer-grid{ grid-template-columns:1fr; text-align:center; }
     .socials{ justify-content:center; }
     .about-cards{ grid-template-columns:1fr 1fr; }
+    .about-text h2, .about-text p{ text-align:center; }
     section{ padding:60px 0; }
     .product-grid{ gap:20px; }
     .parallax-layer{ display:none; }
@@ -564,45 +590,75 @@
     <div class="product-grid">
 
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Chatkhara Begun Snacks" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Chatkhara Begun Snacks</h3><p>Spicy Chicken Flavor, Ye hay Chatkhara!</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Begun-10.png" alt="Chatkhara Begun Snacks" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Begun Snacks</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Chicken Katori" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Chicken Katori</h3><p>Har Bite Karay Excite! Crispy & Tasty</p><span class="price-tag">Rs. 20</span></div>
+        <div class="product-img-wrap"><img src="Chiriya Ghar-10.png" alt="Chicken Katori" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Chiriya Ghar</h3><span class="price-tag">Rs. 20</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Chirya Ghr Snacks" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Chirya Ghr Snacks</h3><p>Jumbo Pack! Mazay Dar, Zaiqa Dar</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Fun stick-10.png" alt="Chirya Ghr Snacks" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Fun stick</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Finger Chips" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Finger Chips</h3><p>Real Masala, Chat Pata Chatkhara</p><span class="price-tag">Rs. 20</span></div>
+        <div class="product-img-wrap"><img src="khurram chips-10.png" alt="Finger Chips" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>khurram chips</h3><span class="price-tag">Rs. 20</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Khuram Chips" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Khuram Chips</h3><p>Zeera & Spicy, Premium Potato Snacks</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Lahori Gate-10.png" alt="Khuram Chips" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Lahori Gate</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Lahori Gate Snacks" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Lahori Gate Snacks</h3><p>Tasty Chicken Flavour with Mixed Spices</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Lemo chaska-10.png" alt="Lahori Gate Snacks" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Lemo chaska</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Lal Anar Corn Pops" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Lal Anar Corn Pops</h3><p>Crunchy & Sweet Corn Pops</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Malang Jan-10.png" alt="Lal Anar Corn Pops" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Malang Jan</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Malang Jan Snacks" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Malang Jan Snacks</h3><p>Tasty, Crispy and Spicy Penne Snacks</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Yakhni-10.png" alt="Malang Jan Snacks" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Yakhni Pulao</h3><span class="price-tag">Rs. 10</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Yakhni Pulao Kararian" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Yakhni Pulao Kararian</h3><p>Authentic Chicken Yakhni Flavour</p><span class="price-tag">Rs. 10</span></div>
+        <div class="product-img-wrap"><img src="Chicken Katori-20.png" alt="Yakhni Pulao Kararian" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Chicken Katori</h3><span class="price-tag">Rs. 20</span></div>
       </div>
       <div class="product-card gsap-stagger tilt-card">
-        <div class="product-img-wrap"><img src="begun.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
-        <div class="product-info"><h3>Khuram Surprise Pack</h3><p>New Mystery Flavor Coming Soon!</p><span class="price-tag">Rs. 15</span></div>
+        <div class="product-img-wrap"><img src="Finger Chips-20.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Finger Chips</h3><span class="price-tag">Rs. 20</span></div>
       </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Khuram Biryani-20.png" alt="Yakhni Pulao Kararian" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Khuram Biryani</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Khuram Chips-20.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Khuram Chips</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="khuram Chips-2.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Khuram Chips</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Khuram Chips-3.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Khuram Chips</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Khuram Chips-4.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Khuram Chips</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Seen Slanty (Salted Flavor)-20.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Seen Slanty (Salted Flavor)</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+      <div class="product-card gsap-stagger tilt-card">
+        <div class="product-img-wrap"><img src="Seen Snacks (Chatpata Flavor)-20.png" alt="Khuram Surprise Pack" width="300" height="300" loading="lazy"></div>
+        <div class="product-info"><h3>Seen Snacks (Chatpata Flavor)</h3><span class="price-tag">Rs. 20</span></div>
+      </div>
+
+
 
     </div>
   </div>
@@ -623,7 +679,7 @@
         <h3>Khuram Foods</h3>
         <p>Bringing exciting, hygienic, and Halal-certified snacks to kids and families across Pakistan. Har Bite Karay Excite!</p>
         <span class="halal-badge">☪️ 100% Halal Certified</span>
-        
+
       </div>
       <div class="footer-col">
         <h4>Contact Us</h4>
@@ -642,6 +698,14 @@
     <div class="footer-bottom">&copy; 2026 Khuram Foods. All Rights Reserved. | Designed with 🧡 for snack lovers everywhere.</div>
   </div>
 </footer>
+
+<!-- ============ IMAGE LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="lightbox-box">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+</div>
 
 <!-- GSAP + ScrollTrigger (advanced scroll-driven animation) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -851,6 +915,44 @@
       el.style.opacity = 1; el.style.transform = 'none';
     });
   }
+
+  /* ---------- ORDER NOW → WHATSAPP ---------- */
+  const waPhone = '923224921846';
+  const waMessage = 'Assalam o Alaikum! Mein KhuramFoods ki products ka order dena chahta hn.';
+  document.querySelectorAll('button').forEach(btn => {
+    if (btn.textContent.trim().toLowerCase().includes('order now')) {
+      btn.addEventListener('click', () => {
+        const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(waMessage)}`;
+        window.open(waUrl, '_blank');
+      });
+    }
+  });
+
+  /* ---------- IMAGE LIGHTBOX (click image to enlarge, click cross to close) ---------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  function openLightbox(img){
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.product-img-wrap img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => openLightbox(img));
+  });
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 })();
 </script>
 
